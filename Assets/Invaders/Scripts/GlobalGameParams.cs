@@ -4,6 +4,7 @@ namespace Invaders
 {
     internal sealed class GlobalGameParams
     {
+        internal const string LevelNameTitle = "Level_{0}";
         internal static GlobalGameParams Instance
         {
             get
