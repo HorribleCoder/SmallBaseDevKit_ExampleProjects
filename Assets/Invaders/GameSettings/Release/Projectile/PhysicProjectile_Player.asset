@@ -16,5 +16,5 @@ MonoBehaviour:
     type: 3}
   shipType: 1
   horizontalSpeed: 0
-  verticalSpeed: 25
+  verticalSpeed: 20
   projectileType: 1

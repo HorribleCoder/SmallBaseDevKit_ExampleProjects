@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using UnityEngine;
 
 using Invaders.Units;
@@ -6,6 +6,7 @@ using Invaders.GameModule;
 using Invaders.GameSettings;
 
 using SmallBaseDevKit;
+using SmallBaseDevKit.GameException;
 using SmallBaseDevKit.USH.Handler;
 using SmallBaseDevKit.USH.State;
 
@@ -19,6 +20,7 @@ namespace Invaders.GameState
             var convertState = currentState.ConvertTo<ActionState>();
             convertState.Deconstruct(out var stateParam);
             Vector3 startEuler = (stateParam.ownerType == ShipType.Player) ? Vector3.zero : Vector3.forward * 180f;
+            stateParam.positon = (stateParam.ownerType == ShipType.Player) ? stateParam.positon : stateParam.positon + Vector3.forward * 5f;
             ProjectileSetting projectileSetting = default;
             switch (stateParam.actionType)
             {
@@ -57,12 +59,21 @@ namespace Invaders.GameState
 
         private void CreateShoot(ProjectileSetting projectileSetting, Vector3 positions, Vector3 euler)
         {
-            var projectile = Game.CreateUnit<Projectile, ProjectileSetting>(projectileSetting);
+            Projectile projectile;
+            if(projectileSetting.shipType == ShipType.Player)
+            {
+                projectile = Game.CreateUnit<PlayerProjectile, ProjectileSetting>(projectileSetting);
+            }
+            else
+            {
+                projectile = Game.CreateUnit<EnemyProjectile, ProjectileSetting>(projectileSetting);
+            }
+            
             projectile.SetPosition(positions);
             projectile.SetRotation(euler);
         }
 
-        private ProjectileSetting GetProjectilePrototypeByType( ProjectileType projectileType , ShipType shiptype)
+        private ProjectileSetting GetProjectilePrototypeByType( ProjectileType projectileType , ShipType shipType)
         {
             if(_projectileSettingList is null)
             {
@@ -70,16 +81,25 @@ namespace Invaders.GameState
             }
 
             ProjectileSetting setting = default;
-
-            for(int i = 0; i < _projectileSettingList.Length; ++i)
+            try
             {
-                if(_projectileSettingList[i].projectileType == projectileType && _projectileSettingList[i].shipType == shiptype)
+                for (int i = 0; i < _projectileSettingList.Length; ++i)
                 {
-                    setting = _projectileSettingList[i];
-                    break;
+                    if (_projectileSettingList[i].projectileType == projectileType && _projectileSettingList[i].shipType == shipType)
+                    {
+                        setting = _projectileSettingList[i];
+                        break;
+                    }
+                }
+                if(setting == default)
+                {
+                    throw new Exception();
                 }
             }
-
+            catch(Exception e)
+            {
+                ExceptionHandler.ExceptionProcessExecute(e, $"In Game Resources not have Projectile Setting - <b>{shipType}</b> by type <b>{projectileType}</b>");
+            }
             return setting;
         }
     }

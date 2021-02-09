@@ -44,15 +44,15 @@ namespace Invaders.GameHandler
             Game.RemoveUnitState<JumpState>(unit);
             if (direction.x > 0)
             {
-                Game.RemoveUnitState<MoveToRightState>(unit);
-                Game.AddUnitState<MoveToLeftState>(unit, AddStateType.AddFirst);
+                Game.RemoveUnitState<PlayerMoveToRightState>(unit);
+                Game.AddUnitState<PlayerMoveToLeftState>(unit, AddStateType.AddFirst);
             }
             else
             {
-                Game.RemoveUnitState<MoveToLeftState>(unit);
-                Game.AddUnitState<MoveToRightState>(unit, AddStateType.AddFirst);
+                Game.RemoveUnitState<PlayerMoveToLeftState>(unit);
+                Game.AddUnitState<PlayerMoveToRightState>(unit, AddStateType.AddFirst);
             }
-            Game.AddUnitStateGroup<FireSingleShoot, JumpState>(unit, AddStateType.AddLast);
+            Game.AddUnitStateGroup<SingleShootState, JumpState>(unit, AddStateType.AddLast);
         }
     }
 }

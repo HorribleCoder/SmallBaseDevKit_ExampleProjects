@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4e688a9c9a9feb4496e23f4f90bbdff, type: 3}
-  m_Name: Enemy_T1
+  m_Script: {fileID: 11500000, guid: 45cd39109f1caa145baa19f1ff1991ed, type: 3}
+  m_Name: PhysicProjectile_Enemy
   m_EditorClassIdentifier: 
-  _itemPrefab: {fileID: 6498460338884210427, guid: 6a20fa9f30239324a9f989c607b048ba,
+  _itemPrefab: {fileID: 1288283306048275019, guid: a8c26b0a2450f7049a6831d692c909e7,
     type: 3}
-  shipType: 2
-  horizontalSpeed: 4
-  verticalSpeed: 4
+  shipType: 0
+  horizontalSpeed: 0
+  verticalSpeed: 15
+  projectileType: 1

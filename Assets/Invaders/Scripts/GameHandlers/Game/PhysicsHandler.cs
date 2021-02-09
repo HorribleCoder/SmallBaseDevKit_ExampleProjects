@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 using Invaders.GameState;
+using Invaders.Units;
 
 using SmallBaseDevKit;
 using SmallBaseDevKit.USH.Handler;
@@ -32,7 +28,12 @@ namespace Invaders.GameHandler
             {
                 if (Physics.Raycast(stateParam.ray, out var hit, stateParam.distance))
                 {
-                    Game.AddUnitState<DestroyState>(Game.GetUnitInRegistor(hit.rigidbody), AddStateType.AddLast);
+                    var hitUnit = Game.GetUnitInRegistor(hit.rigidbody);
+                    if((stateParam.ownerType == ShipType.Player && hitUnit is EnemyShip) || (stateParam.ownerType != ShipType.Player && hitUnit is PlayerShip))
+                    {
+                        Game.AddUnitState<DestroyState>(hitUnit, AddStateType.AddFirst);
+                        Game.AddUnitState<DestroyState>(Game.GetUnitInRegistor(stateParam.selfRB), AddStateType.AddFirst);
+                    }
                 }
             }
             

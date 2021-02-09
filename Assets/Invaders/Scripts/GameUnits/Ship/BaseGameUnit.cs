@@ -34,15 +34,22 @@ namespace Invaders.Units
             var unitRB = characterVisual.GetComponent<Rigidbody>();
             unitRB.velocity = Vector3.zero;
             unitRB.angularVelocity = Vector3.zero;
-            GameInstance.Instance.GetGameModule<VisualModule>().ReturnCharacterVisual(characterVisual);
+            characterVisual.SetActive(false);
         }
 
         protected override void ExtendedSetupUnit()
         {
             this.ReadUnitData<ShipSetting>(out var data);
-            characterVisual = GameInstance.Instance.GetGameModule<VisualModule>().GetCharacterVisual(data.ItemPrefab);
-            ComponentHandler.SetupComponentHandler(this, characterVisual);
-
+            
+            if(characterVisual is null)
+            {
+                characterVisual = Game.CreateNewObject<GameObject>(data.ItemPrefab);
+                ComponentHandler.SetupComponentHandler(this, characterVisual);
+            }
+            else
+            {
+                characterVisual.SetActive(true);
+            }
             try
             {
                 var rb = ComponentHandler.GetComponent<Rigidbody>();
@@ -53,6 +60,7 @@ namespace Invaders.Units
 
                 rb.useGravity = false;
                 rb.freezeRotation = true;
+                Game.AddUnitInRegistorBySpecificType(ComponentHandler.GetComponent<Rigidbody>(), this);
             }
             catch(System.Exception e)
             {

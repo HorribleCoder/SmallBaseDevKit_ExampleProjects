@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-
-using Invaders.GameSettings;
+﻿using UnityEngine;
 
 namespace Invaders.GameState
 {
-    internal sealed class MoveToLeftState : MovementState
+    internal sealed class PlayerMoveToLeftState : MovementState
     {
         protected override Vector3 movementDirecion => Vector3.left;
 
@@ -17,7 +10,7 @@ namespace Invaders.GameState
 
         protected override void ExtendedStateComplite()
         {
-            SmallBaseDevKit.Game.AddUnitState<MoveToRightState>(owner, SmallBaseDevKit.AddStateType.AddFirst);
+            SmallBaseDevKit.Game.AddUnitState<PlayerMoveToRightState>(owner, SmallBaseDevKit.AddStateType.AddFirst);
         }
 
         protected override bool EndState()

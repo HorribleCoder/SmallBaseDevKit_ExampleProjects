@@ -6,13 +6,12 @@ using UnityEngine;
 
 namespace Invaders.Units
 {
-    internal sealed class Projectile : BaseGameUnit<ProjectileSetting>
+    internal abstract class Projectile : BaseGameUnit<ProjectileSetting>
     {
         protected override void ExtendedSetupUnit()
         {
             base.ExtendedSetupUnit();
-            Game.AddUnitState<ProjectileMovement>(this, AddStateType.AddFirst);
-            Game.AddUnitState<ProjectilePhysicState>(this, AddStateType.AddLast);
+            Game.AddUnitStateGroup<ProjectilePhysicState, ProjectileMovement>(this, AddStateType.AddFirst);
         }
     }
 }

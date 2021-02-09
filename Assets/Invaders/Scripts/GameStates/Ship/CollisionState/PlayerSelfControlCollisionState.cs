@@ -25,5 +25,10 @@ namespace Invaders.GameState
         {
             
         }
+
+        protected override Vector3 GetOffset()
+        {
+            return Vector3.zero;
+        }
     }
 }

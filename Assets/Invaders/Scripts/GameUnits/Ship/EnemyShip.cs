@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SmallBaseDevKit;
 
+using Invaders.GameState;
 using Invaders.GameSettings;
 
 namespace Invaders.Units
 {
-    internal abstract class EnemyShip : BaseGameUnit<EnemyShipSetting>
+    internal class EnemyShip : BaseGameUnit<EnemyShipSetting>
     {
+        protected override void ExtendedSetupUnit()
+        {
+            base.ExtendedSetupUnit();
+            Game.AddUnitState<EnemyStartGameState>(this, AddStateType.AddFirst);
+        }
     }
 }

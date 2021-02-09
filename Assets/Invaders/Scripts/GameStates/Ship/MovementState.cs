@@ -7,6 +7,7 @@ using SmallBaseDevKit.GameException;
 using Invaders.Units;
 using Invaders.GameSettings;
 using Invaders.GameHandler;
+using Invaders.LevelSetting;
 
 namespace Invaders.GameState
 {

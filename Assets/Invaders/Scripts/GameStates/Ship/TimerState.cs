@@ -18,7 +18,7 @@ namespace Invaders.GameState
 
         protected override void ExtendedSetupState()
         {
-            _timer = SetTime();
+            ResetTimer();
         }
 
         protected override void ExtendedStateComplite()
@@ -26,7 +26,12 @@ namespace Invaders.GameState
             
         }
 
-        protected abstract float SetTime();
+        protected abstract float SetTimeValue();
         protected abstract void TimerAction();
+
+        protected void ResetTimer()
+        {
+            _timer = SetTimeValue();
+        }
     }
 }

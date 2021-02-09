@@ -1,4 +1,5 @@
-﻿using SmallBaseDevKit;
+﻿using UnityEngine;
+using SmallBaseDevKit;
 
 using Invaders.Events;
 
@@ -6,15 +7,20 @@ namespace Invaders.GameState
 {
     internal sealed class PlayerStartGameState : StartGameState
     {
+        protected override float SetTimeValue()
+        {
+            return Time.time + GlobalGameParams.AwaitGameStartTime;
+        }
+
         protected override void TimerAction()
         {
-            if (UnityEngine.Random.Range(-1f, 1f) > 0)
+            if (Random.Range(-1f, 1f) > 0)
             {
-                Game.AddUnitState<MoveToRightState>(owner, AddStateType.AddFirst);
+                Game.AddUnitState<PlayerMoveToRightState>(owner, AddStateType.AddFirst);
             }
             else
             {
-                Game.AddUnitState<MoveToLeftState>(owner, AddStateType.AddFirst);
+                Game.AddUnitState<PlayerMoveToLeftState>(owner, AddStateType.AddFirst);
             }
             Game.AddUnitStateGroup<PlayerInputState, PlayerSelfControlCollisionState, GravityState>(owner, AddStateType.AddLast);
 

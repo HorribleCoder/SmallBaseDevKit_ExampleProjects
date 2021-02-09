@@ -29,7 +29,7 @@ namespace Invaders.GameModule
             _currentLevelScore = 0;
             _currentPlayerLives = 3;
 
-            _currentLevelNumber = 0;
+            _currentLevelNumber = 1;
         }
 
         internal void SetLevelNumber(int value)

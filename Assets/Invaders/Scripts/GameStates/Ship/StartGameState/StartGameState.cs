@@ -6,15 +6,15 @@ namespace Invaders.GameState
     internal abstract class StartGameState : TimerState
     {
         private bool _isComplite;
+
+        protected override void ExtendedSetupState()
+        {
+            base.ExtendedSetupState();
+            _isComplite = false;
+        }
         protected override bool EndState()
         {
             return _isComplite;
-        }
-
-        protected override float SetTime()
-        {
-            _isComplite = false;
-            return Time.time + GlobalGameParams.AwaitGameStartTime;
         }
 
         protected void SetComplite()

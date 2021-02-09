@@ -37,13 +37,13 @@ namespace Invaders.GameHandler.Core
         {
             var levelData = GameInstance.Instance.GetGameModule<GameResourcesModule>().CurrentLevelData;
             var resourceModule = GameInstance.Instance.GetGameModule<GameResourcesModule>();
-            //player
-            var player = Game.CreateUnit<PlayerShip, ShipSetting>(resourceModule.GetShipSettingByType(ShipType.Player));
-            player.SetPosition(new Vector3(levelData.playerPosX, levelData.playerPosY));
             for (int i = 0; i < levelData.enemyData.Length; ++i)
             {
                 CreateEnemy(levelData.enemyData[i], resourceModule);
             }
+            //player
+            var player = Game.CreateUnit<PlayerShip, ShipSetting>(resourceModule.GetShipSettingByType(ShipType.Player));
+            player.SetPosition(new Vector3(levelData.playerPosX, levelData.playerPosY));
         }
 
         private void ClearGameField()
