@@ -8,7 +8,7 @@ namespace Invaders.GameHandler
     {
         public override void ExecuteHandlerLogic(IState currentState)
         {
-            var converState = ConvertStateToType<MovementState>(currentState);
+            var converState = currentState.ConvertTo<MovementState>();
             converState.Deconstruct(out var stateParam);
             if(currentState is PlayerVerticalMovement)
             {
@@ -18,6 +18,11 @@ namespace Invaders.GameHandler
             {
                 stateParam.rigidbody.velocity = stateParam.velocity;
             }
+        }
+
+        protected override void SetupHandlerOnCreate()
+        {
+
         }
     }
 }

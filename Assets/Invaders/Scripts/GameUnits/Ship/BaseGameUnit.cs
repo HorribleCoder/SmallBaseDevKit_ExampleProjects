@@ -11,7 +11,7 @@ using Invaders.GameModule;
 namespace Invaders.Units
 {
     [RequireComponent(typeof(Rigidbody))]
-    internal abstract class BaseGameUnit<T> : BaseUnit<T>
+    internal abstract class BaseGameUnit<T> : BaseUnitWithData<T>
         where T: BaseGameItemSetting
     {
         protected GameObject characterVisual;
@@ -20,28 +20,32 @@ namespace Invaders.Units
         {
             position -= Vector3.forward * position.z;
             characterVisual.transform.position = position;
-            componentHandler.GetComponent<Rigidbody>().position = position;
+            ComponentHandler.GetComponent<Rigidbody>().position = position;
         }
 
         internal virtual void SetRotation(Vector3 euler)
         {
             characterVisual.transform.rotation = Quaternion.Euler(euler);
-            componentHandler.GetComponent<Rigidbody>().rotation = Quaternion.Euler(euler);
+            ComponentHandler.GetComponent<Rigidbody>().rotation = Quaternion.Euler(euler);
         }
 
         protected override void ExtendedDestroyUnit()
         {
+            var unitRB = characterVisual.GetComponent<Rigidbody>();
+            unitRB.velocity = Vector3.zero;
+            unitRB.angularVelocity = Vector3.zero;
             GameInstance.Instance.GetGameModule<VisualModule>().ReturnCharacterVisual(characterVisual);
         }
 
-        protected override void ExtendedSetupUnit(T unitData)
+        protected override void ExtendedSetupUnit()
         {
-            characterVisual = GameInstance.Instance.GetGameModule<VisualModule>().GetCharacterVisual(unitData.ItemPrefab);
-            componentHandler.SetupComponentHandler(this, characterVisual);
+            this.ReadUnitData<ShipSetting>(out var data);
+            characterVisual = GameInstance.Instance.GetGameModule<VisualModule>().GetCharacterVisual(data.ItemPrefab);
+            ComponentHandler.SetupComponentHandler(this, characterVisual);
 
             try
             {
-                var rb = componentHandler.GetComponent<Rigidbody>();
+                var rb = ComponentHandler.GetComponent<Rigidbody>();
                 if(rb is null)
                 {
                     throw new System.Exception();

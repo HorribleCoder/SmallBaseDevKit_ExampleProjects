@@ -8,12 +8,7 @@ using Invaders.GameSettings;
 
 namespace Invaders.Units
 {
-    internal sealed class EnemyShip : BaseGameUnit<EnemyShipSetting>
+    internal abstract class EnemyShip : BaseGameUnit<EnemyShipSetting>
     {
-        protected override void ExtendedSetupUnit(EnemyShipSetting unitData)
-        {
-            base.ExtendedSetupUnit(unitData);
-
-        }
     }
 }

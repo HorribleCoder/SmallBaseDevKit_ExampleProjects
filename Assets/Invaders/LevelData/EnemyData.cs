@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Invaders.LevelData
+namespace Invaders.LevelSetting
 {
     [Serializable]
     internal sealed class EnemyData

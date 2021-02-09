@@ -8,9 +8,9 @@ namespace Invaders.Units
 {
     internal sealed class Projectile : BaseGameUnit<ProjectileSetting>
     {
-        protected override void ExtendedSetupUnit(ProjectileSetting unitData)
+        protected override void ExtendedSetupUnit()
         {
-            base.ExtendedSetupUnit(unitData);
+            base.ExtendedSetupUnit();
             Game.AddUnitState<ProjectileMovement>(this, AddStateType.AddFirst);
             Game.AddUnitState<ProjectilePhysicState>(this, AddStateType.AddLast);
         }

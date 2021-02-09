@@ -16,11 +16,7 @@ namespace Invaders.GameState
         private ProjectileSetting[] _projectileSettingList;
         public override void ExecuteHandlerLogic(IState currentState)
         {
-            if(_projectileSettingList is null)
-            {
-                _projectileSettingList = GameInstance.Instance.GetGameModule<GameResourcesModule>().GetItemsSettingList<ProjectileSetting>();
-            }
-            var convertState = ConvertStateToType<ActionState>(currentState);
+            var convertState = currentState.ConvertTo<ActionState>();
             convertState.Deconstruct(out var stateParam);
             Vector3 startEuler = (stateParam.ownerType == ShipType.Player) ? Vector3.zero : Vector3.forward * 180f;
             ProjectileSetting projectileSetting = default;
@@ -54,9 +50,14 @@ namespace Invaders.GameState
             }
         }
 
+        protected override void SetupHandlerOnCreate()
+        {
+            _projectileSettingList = GameInstance.Instance.GetGameModule<GameResourcesModule>().GetItemsSettingList<ProjectileSetting>();
+        }
+
         private void CreateShoot(ProjectileSetting projectileSetting, Vector3 positions, Vector3 euler)
         {
-            var projectile = Game.CreateUnit<Projectile>(projectileSetting);
+            var projectile = Game.CreateUnit<Projectile, ProjectileSetting>(projectileSetting);
             projectile.SetPosition(positions);
             projectile.SetRotation(euler);
         }

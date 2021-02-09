@@ -4,6 +4,7 @@ using UnityEngine;
 using Invaders.Units;
 using Invaders.Events;
 using Invaders.GameModule;
+using Invaders.GameSettings;
 
 using SmallBaseDevKit;
 
@@ -38,7 +39,7 @@ namespace Invaders
 
         private void CreatePlayer()
         {
-            var player = Game.CreateUnit<PlayerShip>(GameInstance.Instance.GetGameModule<GameResourcesModule>().GetShipSettingByType(ShipType.Player));
+            var player = Game.CreateUnit<PlayerShip, ShipSetting>(GameInstance.Instance.GetGameModule<GameResourcesModule>().GetShipSettingByType(ShipType.Player));
             player.SetPosition(Camera.main.ScreenToWorldPoint(_playerPoint.position));
         }
 
@@ -47,7 +48,7 @@ namespace Invaders
             EnemyShip enemyShip = default;
             for(int i = 0; i < _enemyPointList.Length; ++i)
             {
-                enemyShip = Game.CreateUnit<EnemyShip>(GameInstance.Instance.GetGameModule<GameResourcesModule>().GetShipSettingByType(ShipType.Enemy_Type_1));
+                enemyShip = Game.CreateUnit<EnemyShip, ShipSetting>(GameInstance.Instance.GetGameModule<GameResourcesModule>().GetShipSettingByType(ShipType.Enemy_Type_1));
                 enemyShip.SetPosition(Camera.main.ScreenToWorldPoint(_enemyPointList[i].position));
             }
         }
@@ -56,7 +57,6 @@ namespace Invaders
         private void RestartPlayerEventCallback(object sender, EventArgs eventArgs)
         {
             CreatePlayer();
-
         }
     }
 }

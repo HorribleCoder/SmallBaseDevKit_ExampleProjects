@@ -40,7 +40,7 @@ namespace Invaders.LevelEditor
             if(transform.childCount > 0)
             {
                 _visualShip = transform.GetChild(0).GetComponent<MeshFilter>();
-                _defaultMesh = _visualShip.mesh;
+                _defaultMesh = _visualShip.sharedMesh;
             }
         }
 

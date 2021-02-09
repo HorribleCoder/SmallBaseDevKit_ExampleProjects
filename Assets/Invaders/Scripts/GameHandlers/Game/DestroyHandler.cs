@@ -13,7 +13,7 @@ namespace Invaders.GameHandler
     {
         public override void ExecuteHandlerLogic(IState currentState)
         {
-            var convertState = ConvertStateToType<DestroyState>(currentState);
+            var convertState = currentState.ConvertTo<DestroyState>();
             convertState.Deconstruct(out var stateParam);
 
             if(stateParam is PlayerShip)
@@ -28,5 +28,9 @@ namespace Invaders.GameHandler
             SmallBaseDevKit.Game.DestroyUnit(stateParam);
         }
 
+        protected override void SetupHandlerOnCreate()
+        {
+
+        }
     }
 }

@@ -4,6 +4,9 @@ namespace Invaders
 {
     internal sealed class GlobalGameParams
     {
+        internal const float AwaitGameStartTime = 1f;
+
+        internal const string LevelsFolderPath = "/Resources/Levels/";
         internal const string LevelNameTitle = "Level_{0}";
         internal static GlobalGameParams Instance
         {

@@ -1,4 +1,4 @@
-﻿namespace Invaders.LevelData
+﻿namespace Invaders.LevelSetting
 {
     internal sealed class LevelData
     {
