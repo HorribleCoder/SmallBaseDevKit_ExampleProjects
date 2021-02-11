@@ -404,7 +404,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1367966259}
-  - component: {fileID: 1367966260}
   m_Layer: 5
   m_Name: GameInfo
   m_TagString: Untagged
@@ -432,20 +431,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1367966260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1367966258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c852e4d7bd9c2b145a649eddcd1e62fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _score: {fileID: 0}
-  _lives: {fileID: 0}
 --- !u!1 &1420331393
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,6 +629,7 @@ GameObject:
   - component: {fileID: 1786774976}
   - component: {fileID: 1786774978}
   - component: {fileID: 1786774977}
+  - component: {fileID: 1786774979}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -711,6 +697,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786774975}
   m_CullTransparentMesh: 0
+--- !u!114 &1786774979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786774975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310bb856b73210e4f84d04f9b3e329b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guiType: 1
 --- !u!1 &1808820331
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,6 +1072,7 @@ GameObject:
   - component: {fileID: 2065733114}
   - component: {fileID: 2065733116}
   - component: {fileID: 2065733115}
+  - component: {fileID: 2065733117}
   m_Layer: 5
   m_Name: Lives
   m_TagString: Untagged
@@ -1140,3 +1140,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065733113}
   m_CullTransparentMesh: 0
+--- !u!114 &2065733117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065733113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310bb856b73210e4f84d04f9b3e329b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _guiType: 2

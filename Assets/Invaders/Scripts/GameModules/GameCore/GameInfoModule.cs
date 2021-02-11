@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using SmallBaseDevKit.GameModule;
+﻿using SmallBaseDevKit.GameModule;
 
 namespace Invaders.GameModule
 {
@@ -35,6 +29,11 @@ namespace Invaders.GameModule
         internal void SetLevelNumber(int value)
         {
             _currentLevelNumber = value;
+        }
+
+        internal void AddGameScore(int value)
+        {
+            _currentLevelScore += value;
         }
     }
 }

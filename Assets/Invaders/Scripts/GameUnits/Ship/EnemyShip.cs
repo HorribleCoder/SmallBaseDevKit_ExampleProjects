@@ -2,6 +2,7 @@
 
 using Invaders.GameState;
 using Invaders.GameSettings;
+using Invaders.GameModule;
 
 namespace Invaders.Units
 {

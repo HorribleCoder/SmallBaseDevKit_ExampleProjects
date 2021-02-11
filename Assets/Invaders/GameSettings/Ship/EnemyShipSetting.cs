@@ -10,6 +10,6 @@ namespace Invaders.GameSettings
     [CreateAssetMenu(fileName = "New Enemy Ship Setting", menuName = "Invaders/Settings/Enemy Ship Setting")]
     internal sealed class EnemyShipSetting : ShipSetting
     {
-        public readonly int scoreValue;
+        public int scoreValue;
     }
 }

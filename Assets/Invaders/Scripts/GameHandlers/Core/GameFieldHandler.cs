@@ -6,6 +6,7 @@ using SmallBaseDevKit.USH.State;
 using SmallBaseDevKit.USH.Unit;
 
 using Invaders.Units;
+using Invaders.Events;
 using Invaders.LevelSetting;
 using Invaders.GameSettings;
 using Invaders.GameModule;
@@ -44,6 +45,18 @@ namespace Invaders.GameHandler.Core
             //player
             var player = Game.CreateUnit<PlayerShip, ShipSetting>(resourceModule.GetShipSettingByType(ShipType.Player));
             player.SetPosition(new Vector3(levelData.playerPosX, levelData.playerPosY));
+
+            //resetGUI
+            GameInstance.Instance.GetGameModule<GameInfoModule>().RestartGame();
+            GUIType currentGUIType = GUIType.PlayerScore;
+            Game.ExecuteEvent<GUISetValueEventArg>(eventArgSetupCallback: SetupInfoGUI);
+            currentGUIType = GUIType.PlayerLives;
+            Game.ExecuteEvent<GUISetValueEventArg>(eventArgSetupCallback: SetupInfoGUI);
+
+            void SetupInfoGUI(GUISetValueEventArg eventArg)
+            {
+                eventArg.guiType = currentGUIType;
+            }
         }
 
         private void ClearGameField()

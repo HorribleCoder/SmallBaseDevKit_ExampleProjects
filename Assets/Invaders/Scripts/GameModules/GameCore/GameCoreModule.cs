@@ -34,7 +34,7 @@ namespace Invaders.GameModule
         private static void GameInitialize()
         {
             var self = GameInstance.Instance.GetGameModule<GameCoreModule>();
-            //TODO add GUI module
+            GameInstance.Instance.GetGameModule<GUIModule>();
         }
 
     }

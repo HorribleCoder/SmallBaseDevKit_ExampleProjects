@@ -15,5 +15,6 @@ MonoBehaviour:
   _itemPrefab: {fileID: 6498460338884210427, guid: 6a20fa9f30239324a9f989c607b048ba,
     type: 3}
   shipType: 2
-  horizontalSpeed: 4
-  verticalSpeed: 4
+  horizontalSpeed: 2
+  verticalSpeed: 2
+  scoreValue: 15
