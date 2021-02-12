@@ -26,15 +26,26 @@ namespace Invaders.GameModule
         private GameFieldUnit _gameFieldUnit;
         protected override void CreateModule()
         {
-            //Game.AddUnitState<CreateGameFieldState>(this.GameFieldUnit, AddStateType.AddFirst);
-            //this is test
-            Game.AddUnitStateGroup<CreateGameFieldState, TestModePlayerInputState>(this.GameFieldUnit, AddStateType.AddFirst);
+            //test in editor
+            Game.AddUnitState<TestModePlayerInputState>(this.GameFieldUnit, AddStateType.AddFirst);
         }
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void GameInitialize()
         {
             var self = GameInstance.Instance.GetGameModule<GameCoreModule>();
             GameInstance.Instance.GetGameModule<GUIModule>();
+        }
+
+        internal void GamePause(InteractiveStatus pause)
+        {
+            if(pause == InteractiveStatus.Enable)
+            {
+                Game.AddUnitState<GamePauseState>(GameFieldUnit, AddStateType.AddLast);
+            }
+            else
+            {
+                Game.AddUnitState<GameUnpauseState>(GameFieldUnit, AddStateType.AddLast);
+            }
         }
 
     }

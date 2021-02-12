@@ -17,15 +17,5 @@ namespace Invaders.Units
             base.ExtendedSetupUnit();
             Game.AddUnitState<PlayerStartGameState>(this, AddStateType.AddFirst);
         }
-
-        protected override void ExtendedDestroyUnit()
-        {
-            base.ExtendedDestroyUnit();
-            Game.ExecuteEvent<PlayerInputAreaControllerEventArg>(eventArgSetupCallback: SetupEventArg);
-            void SetupEventArg(PlayerInputAreaControllerEventArg eventArg)
-            {
-                eventArg.isActive = false;
-            }
-        }
     }
 }

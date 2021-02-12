@@ -30,6 +30,20 @@ namespace Invaders.GameHandler
                     eventArg.guiType = GUIType.PlayerScore;
                 }
             }
+            if(stateParam is PlayerShip)
+            {
+                Game.ExecuteEvent<GUIActivePanelEventArg>(eventArgSetupCallback: SetupPanelEventArg);
+                void SetupPanelEventArg(GUIActivePanelEventArg eventArg)
+                {
+                    eventArg.guiType = GUIType.RestartPanel;
+                    eventArg.status = InteractiveStatus.Enable;
+                }
+                Game.ExecuteEvent<PlayerInputAreaControllerEventArg>(eventArgSetupCallback: SetupEventArg);
+                void SetupEventArg(PlayerInputAreaControllerEventArg eventArg)
+                {
+                    eventArg.status = InteractiveStatus.Disable;
+                }
+            }
 
             Game.DestroyUnit(stateParam);
         }

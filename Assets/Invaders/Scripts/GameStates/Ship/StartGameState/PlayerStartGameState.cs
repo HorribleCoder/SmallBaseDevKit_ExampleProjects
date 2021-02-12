@@ -27,7 +27,7 @@ namespace Invaders.GameState
             Game.ExecuteEvent<PlayerInputAreaControllerEventArg>(eventArgSetupCallback: SetupEventArg);
             void SetupEventArg(PlayerInputAreaControllerEventArg eventArg)
             {
-                eventArg.isActive = true;
+                eventArg.status = InteractiveStatus.Enable;
             }
             SetComplite();
         }

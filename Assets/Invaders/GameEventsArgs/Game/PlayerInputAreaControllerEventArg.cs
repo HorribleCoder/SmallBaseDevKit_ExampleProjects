@@ -4,6 +4,6 @@ namespace Invaders.Events
 {
     internal sealed class PlayerInputAreaControllerEventArg : EventArgs
     {
-        public bool isActive;
+        internal InteractiveStatus status = InteractiveStatus.Disable;
     }
 }

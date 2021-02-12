@@ -9,7 +9,7 @@ using SmallBaseDevKit.GameException;
 
 using Invaders.Links;
 using Invaders.Events;
-using Invaders.GameModule;
+using Invaders.GameState.Core;
 
 namespace Invaders.GameModule
 {
@@ -25,12 +25,48 @@ namespace Invaders.GameModule
 
             for(int i = 0; i < allGuiLink.Length; ++i)
             {
-                _guiTable.Add(allGuiLink[i].GUIType, allGuiLink[i]);
+                if (!_guiTable.ContainsKey(allGuiLink[i].GUIType))
+                {
+                    _guiTable.Add(allGuiLink[i].GUIType, allGuiLink[i]);
+                }
+                else
+                {
+                    _Debug.Log($"GUI module contains key - {allGuiLink[i].GUIType} check gameobject - {allGuiLink[i].gameObject}", DebugColor.orange);
+                }
+                allGuiLink[i].gameObject.SetActive(allGuiLink[i].GUIStartGameStatus == InteractiveStatus.Enable);
             }
 
+            Game.AddEventListner<GUIButtonPressedEventArg>(GUIButtonEventCallback);
             Game.AddEventListner<GUISetValueEventArg>(GUISetValueEventCallback);
+            Game.AddEventListner<GUIActivePanelEventArg>(GUISetActivePanelEventCallback);
         }
         #region Event Callback
+
+        private void GUIButtonEventCallback(object sender, EventArgs eventArgs)
+        {
+            var convertArg = eventArgs as GUIButtonPressedEventArg;
+
+            switch (convertArg.buttonType)
+            {
+                case GUIType.PlayerInputArea:
+                    if (GlobalGameParams.Instance.gameOnPause) return;
+                    Game.ExecuteEvent<PlayerInputEventArg>();
+                    break;
+                case GUIType.StartGameButton:
+                    Game.AddUnitState<CreateGameFieldState>(GameInstance.Instance.GetGameModule<GameCoreModule>().GameFieldUnit, AddStateType.AddFirst);
+                    ChangeGUIElementActiveStatus(GUIType.StartGamePanel, InteractiveStatus.Disable);
+                    ChangeGUIElementActiveStatus(GUIType.GameInfoPanel, InteractiveStatus.Enable);
+                    break;
+                case GUIType.RestartGameButton:
+                    Game.AddUnitState<ClearGameFieldState>(GameInstance.Instance.GetGameModule<GameCoreModule>().GameFieldUnit, AddStateType.AddFirst);
+                    GameInstance.Instance.GetGameModule<GameCoreModule>().GamePause(InteractiveStatus.Disable);
+                    ChangeGUIElementActiveStatus(GUIType.RestartPanel, InteractiveStatus.Disable);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void GUISetValueEventCallback(object sender, EventArgs eventArgs)
         {
             var converArg = eventArgs as GUISetValueEventArg;
@@ -53,12 +89,13 @@ namespace Invaders.GameModule
         private void GUISetActivePanelEventCallback(object sender, EventArgs eventArgs)
         {
             var converArg = eventArgs as GUIActivePanelEventArg;
-            _guiTable.TryGetValue(converArg.guiType, out var guiPanel);
+            ChangeGUIElementActiveStatus(converArg.guiType, converArg.status);
             switch (converArg.guiType)
             {
                 case GUIType.StartGamePanel:
                     break;
                 case GUIType.RestartPanel:
+                    GameInstance.Instance.GetGameModule<GameCoreModule>().GamePause(converArg.status);
                     break;
                 default:
                     GUIElementException(converArg.guiType);
@@ -73,6 +110,14 @@ namespace Invaders.GameModule
         
         #endregion
 
+        private void ChangeGUIElementActiveStatus(GUIType elementType, InteractiveStatus status)
+        {
+            if(_guiTable.TryGetValue(elementType, out var elementLink))
+            {
+                elementLink.gameObject.SetActive(status == InteractiveStatus.Enable);
+            }
+        }
+        
         private void ChangeValue(GameObject guiElement, int value, string valueFormat = "")
         {
             try

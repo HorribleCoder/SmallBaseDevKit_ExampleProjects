@@ -26,6 +26,8 @@ namespace Invaders
         internal readonly float horizontalLimit;
         internal readonly float verticalLimit;
 
+        internal bool gameOnPause;
+
 
         private GlobalGameParams()
         {
