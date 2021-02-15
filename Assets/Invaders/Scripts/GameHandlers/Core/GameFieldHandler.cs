@@ -36,16 +36,6 @@ namespace Invaders.GameHandler.Core
 
         private void CreateGameField()
         {
-            var levelData = GameInstance.Instance.GetGameModule<GameResourcesModule>().CurrentLevelData;
-            var resourceModule = GameInstance.Instance.GetGameModule<GameResourcesModule>();
-            for (int i = 0; i < levelData.enemyData.Length; ++i)
-            {
-                CreateEnemy(levelData.enemyData[i], resourceModule);
-            }
-            //player
-            var player = Game.CreateUnit<PlayerShip, ShipSetting>(resourceModule.GetShipSettingByType(ShipType.Player));
-            player.SetPosition(new Vector3(levelData.playerPosX, levelData.playerPosY));
-
             //resetGUI
             GameInstance.Instance.GetGameModule<GameInfoModule>().RestartGame();
             GUIType currentGUIType = GUIType.PlayerScore;
@@ -57,6 +47,16 @@ namespace Invaders.GameHandler.Core
             {
                 eventArg.guiType = currentGUIType;
             }
+
+            var levelData = GameInstance.Instance.GetGameModule<GameResourcesModule>().CurrentLevelData;
+            var resourceModule = GameInstance.Instance.GetGameModule<GameResourcesModule>();
+            for (int i = 0; i < levelData.enemyData.Length; ++i)
+            {
+                CreateEnemy(levelData.enemyData[i], resourceModule);
+            }
+            //player
+            var player = Game.CreateUnit<PlayerShip, ShipSetting>(resourceModule.GetShipSettingByType(ShipType.Player));
+            player.SetPosition(new Vector3(levelData.playerPosX, levelData.playerPosY));
         }
 
         private void ClearGameField()
@@ -82,7 +82,7 @@ namespace Invaders.GameHandler.Core
                 default:
                     break;
             }
-
+            GameInstance.Instance.GetGameModule<GameInfoModule>().AddUnitInLiveTable(enemy, enemyData.enemyHealth);
             enemy.SetPosition(new Vector3(enemyData.posX, enemyData.posY));
         }
 

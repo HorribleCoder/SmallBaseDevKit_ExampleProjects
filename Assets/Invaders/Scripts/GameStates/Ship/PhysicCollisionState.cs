@@ -39,7 +39,6 @@ namespace Invaders.GameState
 
         protected override bool EndState()
         {
-            //return Physics.Raycast(ownerRigidBody.position, GetPhysicDirection(), checkDistance);
             return false;
         }
     }

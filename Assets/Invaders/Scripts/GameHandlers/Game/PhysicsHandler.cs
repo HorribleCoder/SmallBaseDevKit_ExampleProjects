@@ -21,7 +21,7 @@ namespace Invaders.GameHandler
                 if(Physics.SphereCast(stateParam.ray.origin, stateParam.distance, Vector3.one, out var hit))
                 {
                     Game.AddUnitState<DestroyState>(Game.GetUnitInRegistor(hit.rigidbody), AddStateType.AddLast);
-                    Game.AddUnitState<DestroyState>(Game.GetUnitInRegistor(stateParam.selfRB), AddStateType.AddLast);
+                    Game.AddUnitState<UnitHitState>(Game.GetUnitInRegistor(stateParam.selfRB), AddStateType.AddLast);
                 }
             }
             else
@@ -31,7 +31,7 @@ namespace Invaders.GameHandler
                     var hitUnit = Game.GetUnitInRegistor(hit.rigidbody);
                     if((stateParam.ownerType == ShipType.Player && hitUnit is EnemyShip) || (stateParam.ownerType != ShipType.Player && hitUnit is PlayerShip))
                     {
-                        Game.AddUnitState<DestroyState>(hitUnit, AddStateType.AddFirst);
+                        Game.AddUnitState<UnitHitState>(hitUnit, AddStateType.AddFirst);
                         Game.AddUnitState<DestroyState>(Game.GetUnitInRegistor(stateParam.selfRB), AddStateType.AddFirst);
                     }
                 }
