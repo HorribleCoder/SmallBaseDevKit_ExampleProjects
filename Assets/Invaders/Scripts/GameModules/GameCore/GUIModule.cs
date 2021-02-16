@@ -70,7 +70,6 @@ namespace Invaders.GameModule
         private void GUISetValueEventCallback(object sender, EventArgs eventArgs)
         {
             var converArg = eventArgs as GUISetValueEventArg;
-            _Debug.Log(converArg.guiType);
             _guiTable.TryGetValue(converArg.guiType, out var guiElement);
             var gameInfoModule = GameInstance.Instance.GetGameModule<GameInfoModule>();
             switch (converArg.guiType)
