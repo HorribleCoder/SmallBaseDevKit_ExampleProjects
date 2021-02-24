@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+using SmallBaseDevKit;
+
+using TD.Events;
+
 public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
     public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
@@ -74,6 +78,11 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         FormatInput();
         HandleInput(input.magnitude, input.normalized, radius, cam);
         handle.anchoredPosition = input * radius * handleRange;
+        Game.ExecuteEvent(this, (PlayerInputDirectionEventArg eventArg) =>
+        {
+            eventArg.posX = input.x;
+            eventArg.posY = input.y;
+        });
     }
 
     protected virtual void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
@@ -133,6 +142,11 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     {
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
+        Game.ExecuteEvent(this, (PlayerInputDirectionEventArg eventArg) =>
+        {
+            eventArg.posX = 0;
+            eventArg.posY = 0;
+        });
     }
 
     protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)

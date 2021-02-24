@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using SmallBaseDevKit;
+using SmallBaseDevKit.USH.Unit;
+
+namespace TD.Level
+{
+    internal sealed class LevelCreator : BaseUnit
+    {
+        protected override void ExtendedDestroyUnit()
+        {
+
+        }
+
+        protected override void ExtendedSetupUnit()
+        {
+
+        }
+    }
+}
