@@ -10,9 +10,9 @@ using SmallBaseDevKit;
 using SmallBaseDevKit.USH.Handler;
 using SmallBaseDevKit.USH.State;
 
-using TD.Chacters.State;
+using TD.Characters.State;
 
-namespace TD.Chacters.Handler
+namespace TD.Characters.Handler
 {
     internal sealed class AnimationHandler : BaseGameHandler
     {

@@ -9,7 +9,7 @@ using SmallBaseDevKit;
 
 using TD.GameModules;
 
-namespace TD.Chacters.State
+namespace TD.Characters.State
 {
     internal sealed class PlayerAwaitMoveState : MoveToState
     {
@@ -32,7 +32,15 @@ namespace TD.Chacters.State
         protected override void ExtendedStateComplite()
         {
             base.ExtendedStateComplite();
-            Game.AddUnitStateGroup<PlayerMoveToState, RunAnimationState>(owner, AddStateType.AddFirst);
+            Game.AddUnitState<PlayerMoveToState>(owner, AddStateType.AddFirst);
+            if(ownerData.movementType == CharacterMovementType.Walk)
+            {
+                Game.AddUnitState<WalkAnimationState>(owner, AddStateType.AddFirst);
+            }
+            else
+            {
+                Game.AddUnitState<RunAnimationState>(owner, AddStateType.AddFirst);
+            }
         }
     }
 }

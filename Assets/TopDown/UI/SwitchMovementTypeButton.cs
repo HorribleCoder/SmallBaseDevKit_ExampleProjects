@@ -3,15 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityEngine.UI;
+using UnityEngine;
+
+using SmallBaseDevKit;
+
+using TD.Events;
 
 namespace TD.UI
 {
     internal sealed class SwitchMovementTypeButton : LazyButton
     {
-        protected override void SetupButton(Button button)
+        protected override GUIButtonType guiButtonType => GUIButtonType.ChangeMovementType;
+
+        private void Update()
         {
-            throw new NotImplementedException();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                OnInput();
+            }
         }
     }
 }

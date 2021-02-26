@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 using SmallBaseDevKit;
@@ -11,7 +8,7 @@ using SmallBaseDevKit.USH.State;
 
 using TD.GameModules;
 using TD.Links;
-using TD.Chacters;
+using TD.Characters;
 using TD.Setting;
 
 namespace TD.Level
@@ -44,7 +41,8 @@ namespace TD.Level
             //player
             var player = Game.CreateUnit<PlayerCharacter, CharacterSetting>(GameInstance.Instance.GetGameModule<ResourscesModule>().GetCharacterSettingByType(CharacterType.Player));
             player.SetPosition(playerPoint.GetRandomPositonInPointArea());
-            
+            player.AddData();
+            GameInstance.Instance.GetGameModule<PlayerInputModule>().SetPlayer(player);
         }
 
         private void ClearGameField()

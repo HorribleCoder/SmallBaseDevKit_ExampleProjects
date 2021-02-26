@@ -7,10 +7,10 @@ using UnityEngine;
 
 using SmallBaseDevKit;
 
-using TD.Chacters.State;
+using TD.Characters.State;
 using TD.Events;
 
-namespace TD.Chacters
+namespace TD.Characters
 {
     internal sealed class PlayerCharacter : BaseCharacter
     {

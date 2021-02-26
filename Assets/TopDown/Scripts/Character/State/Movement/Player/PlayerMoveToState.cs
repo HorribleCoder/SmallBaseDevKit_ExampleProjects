@@ -1,9 +1,9 @@
-﻿using SmallBaseDevKit;
+﻿using UnityEngine;
+using SmallBaseDevKit;
 
 using TD.GameModules;
-using UnityEngine;
 
-namespace TD.Chacters.State
+namespace TD.Characters.State
 {
     internal sealed class PlayerMoveToState : MoveToState
     {

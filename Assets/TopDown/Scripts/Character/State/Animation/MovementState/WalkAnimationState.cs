@@ -1,5 +1,5 @@
 ﻿
-namespace TD.Chacters.State
+namespace TD.Characters.State
 {
     internal sealed class WalkAnimationState : AnimationMovementState
     {

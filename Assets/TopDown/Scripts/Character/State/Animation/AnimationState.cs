@@ -10,9 +10,9 @@ using SmallBaseDevKit.USH.Unit;
 using SmallBaseDevKit.USH.State;
 using SmallBaseDevKit.GameException;
 
-using TD.Chacters.Handler;
+using TD.Characters.Handler;
 
-namespace TD.Chacters.State
+namespace TD.Characters.State
 {
     [RequiredHandler(typeof(AnimationHandler))]
     internal abstract class AnimationState<T> : BaseUnitState<(Animator ownerAnimator, string keyName, T value)>

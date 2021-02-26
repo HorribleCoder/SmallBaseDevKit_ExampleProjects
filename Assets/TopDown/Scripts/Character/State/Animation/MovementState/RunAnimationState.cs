@@ -1,4 +1,4 @@
-﻿namespace TD.Chacters.State
+﻿namespace TD.Characters.State
 {
     internal sealed class RunAnimationState : AnimationMovementState
     {

@@ -10,19 +10,24 @@ using SmallBaseDevKit;
 using SmallBaseDevKit.GameException;
 using SmallBaseDevKit.USH.State;
 
-using TD.Chacters.Handler;
+using TD.GameModules;
+using TD.Characters.Handler;
 
-namespace TD.Chacters.State
+namespace TD.Characters.State
 {
     [RequiredHandler(typeof(MovementHandler))]
-    internal abstract class MoveToState : BaseUnitState<(NavMeshAgent agent, Vector3 point)>
+    internal abstract class MoveToState : BaseUnitState<(NavMeshAgent agent, Vector3 point, CharacterMovementType movementType)>
     {
         internal NavMeshAgent Agent { get => _agent; }
         private NavMeshAgent _agent;
-        public override void Deconstruct(out (NavMeshAgent agent, Vector3 point) stateParam)
+
+        protected CharacterData ownerData;
+        
+        public override void Deconstruct(out (NavMeshAgent agent, Vector3 point, CharacterMovementType movementType) stateParam)
         {
             stateParam.agent = _agent;
             stateParam.point = GetMovementPoint();
+            stateParam.movementType = ownerData.movementType;
         }
 
         protected override void ExtendedSetupState()
@@ -34,6 +39,7 @@ namespace TD.Chacters.State
                 {
                     throw new NullReferenceException();
                 }
+                ownerData = owner.GetData();
             }
             catch(Exception e)
             {

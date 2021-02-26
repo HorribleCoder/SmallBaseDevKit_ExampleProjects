@@ -10,8 +10,9 @@ using SmallBaseDevKit;
 using SmallBaseDevKit.USH.Unit;
 
 using TD.Setting;
+using TD.GameModules;
 
-namespace TD.Chacters
+namespace TD.Characters
 {
     [RequireComponent(typeof(NavMeshAgent), typeof(Animator))]
     internal abstract class BaseCharacter : BaseUnitWithData<CharacterSetting>
